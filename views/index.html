@@ -3,14 +3,14 @@
 <head>
     <title>로그인 페이지</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
     </head>
 <body>
     <h1>Log in</h1>
     <form method="POST" action="/logincheck">
         ID <input type="text" name="id"><br>
         PW <input type="password" name="pw"><br>
-        <input type ="submit" value="Log in">
+        <input class="btn btn-success" type ="submit" value="Log in"><button type="button" class="btn btn-success" onclick = "location.href='/signup'">Sign up</button>
     </form>
-    <button onclick = "location.href='./signup'">Sign up</button>
     </body>
 </html>
