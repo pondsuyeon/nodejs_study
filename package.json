@@ -6,8 +6,7 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "ejs": "*",
-    "express": "3.21.2"
+    "express": "3.21.2",
+    "ejs": "*"
   }
 }
