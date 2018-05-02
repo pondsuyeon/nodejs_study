@@ -12,7 +12,7 @@ var bodyPaser = require('body-parser')
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3007);
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
@@ -25,6 +25,11 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
+
+/*app.get('/', function(req, res){
+	res.send("<script>alert('Hello, Customers');</script>");
+});
+*/
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
@@ -43,6 +48,7 @@ app.post('/logincheck', function(req, res){
 		}
 	}
 });
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
