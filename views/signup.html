@@ -8,44 +8,48 @@
 
     </head>
     <body>
-        <img src="signup.png" style="margin-left: auto;margin-right: auto; width: 400px; display: block; vertical-align: 10px" ><br><br>
-          <form>  
+        <img src="./signup.png" style="margin-left: auto;margin-right: auto; width: 400px; display: block; vertical-align: 10px" ><br><br>
+          <form method="post" action="/signupcheck" >  
         <div class="form-group" style="width: 400px; margin: auto;">
             <div>
-                <label for="NewID" style="float:left; width: 100px">ID</label>
-                <input class="form-control" type ="text" placeholder="6자 이상" style="width:200px; float:left;">
-            <button type="button" class="btn btn-success" style="margin-left: 10px;" >확인</button><br>
+                <label for="newid" style="float:left; width: 100px">ID</label>
+                <input class="form-control" id="newid" name="newid" type ="text" placeholder="6자 이상" style="width:200px; float:left;">
+            <button type="button" class="btn btn-success" style="margin-left: 10px;" >중복확인</button><br>
         </div>
             <br>
          <div>
-        <label for="NewNickname" style="float:left; width: 100px;">닉네임</label>
-            <input class="form-control" type ="text" placeholder="3자 이상" style="width:200px">
+        <label for="newnickname" style="float:left; width: 100px;">닉네임</label>
+            <input class="form-control" id="newnickname" name="newnickname" type ="text" placeholder="3자 이상" style="width:200px">
             </div>
             <br>
          <div>
-        <label for = "NewPassword" style="float:left; width: 100px;">비밀번호</label>
-            <input class="form-control" type ="password" placeholder="최소 8자 이상" style="width: 200px">
+             <label for="newemail" style="float: left; width: 100px;">Email</label>
+             <input class="form-control" id="newemail" name="newemail" type="email" placeholder="abc@abc.kr" style="width:200px">
             </div>
             <br>
-            <div style="width:500px;">
-             <label for = "CheckPassword" style="float:left; width: 100px;">비밀번호 확인</label>
-            <input class="form-control" type ="password" style="width: 200px">
+            <div>
+        <label for = "newpw" style="float:left; width: 100px;">비밀번호</label>
+            <input class="form-control" id="newid" name="newpw" type ="password" placeholder="최소 8자 이상" style="width: 200px">
+            </div>
+            <br>
+            <div>
+             <label for = "checkpw" style="float:left; width: 100px;">비밀번호 확인</label>
+            <input class="form-control" id="checkpw" name="checkpw" type ="password" style="width: 200px">
             </div>
             <br>
          <div>
-        <label for ="Name" style="float:left; width: 100px;">이름</label>
-            <input class="form-control" type ="text" style="width: 200px">
+        <label for ="newname" style="float:left; width: 100px;">이름</label>
+            <input class="form-control" id="newname" name="newname" type ="text" style="width: 200px">
             </div>
             <br>
              <div> 
-             <label for="PhoneNumber" style="float:left; width: 100px;">휴대폰 번호</label>
-            <input class="form-control" type ="text" style="width: 200px; float:left;">
-            <button type="button" class="btn btn-success" style="margin-left: 10px;" >확인</button>
+             <label for="newpn" style="float:left; width: 100px;">휴대폰 번호</label>
+            <input class="form-control" id="newpn" name="newpn" type ="text" style="width: 200px;">
             </div>
             <br>
              <div>
-                  <label for="Birthday" style="float:left; width: 100px;">생일</label>
-            <input class="form-control" type ="date" style="width: 200px"><br>   
+                  <label for="newbd" style="float:left; width: 100px;">생일</label>
+                <input class="form-control" id="newbd" name="newbd" type ="date" style="width: 200px"><br>   
             </div>
             <br>
             <div style="float: right; margin-right: 20px;">

@@ -48,18 +48,18 @@ app.get('/', function(req, res){
    res.render('index.html');
 });
 app.get('/signup', function(req, res){
-   res.render('signup.html');
+   res.render('./signup.html');
 });
 
 app.post('/logincheck', function(req, res){
    var uid=req.body.id;
    var upw=req.body.pw;
    var connection=client.query
-   ('SELECT count(*) cnt FROM user WHERE user_email=? and user_pw=?', [uid, upw], function(err,rows){
+   ('SELECT count(*) cnt FROM user WHERE user_id=? and user_pw=?', [uid, upw], function(err,rows){
       if(err) console.error('err', err);
       var cnt = rows[0].cnt;
       if(cnt===1){
-//    	  req.session.user_id=id;
+// req.session.user_id=id;
     	  res.send(
     			  '<h1>login success</h1>');
       }else{
@@ -68,7 +68,34 @@ app.post('/logincheck', function(req, res){
       }
    });
 });
+app.post('/signupcheck', function(req, res){
+	var nid=req.body.newid;
+	var nnn=req.body.newnickname;
+	var nem=req.body.newemail;
+	var npw=req.body.newpw;
+	var nn=req.body.newname;
+	var npn=req.body.newpn;
+	var nbd=req.body.newbd;
+	var connection=client.query
+	('INSERT INTO user (user_id, user_nickname, user_email,	 user_pw, user_name, user_pn, user_bd) VALUES (?, ?, ?, ?, ?, ?, ?)',
+			[nid, nnn, nem, npw, nn, npn, nbd] ,function(err,result){
+	    
+	    console.log(result);
+	       
+	       
+	        if (err) {
 
+	            console.error(err);
+
+	            throw err;
+
+	        }
+
+	        console.log(connection);
+
+	    });
+	    res.send('<h1>'+nid+'님 환영합니다.'+'</h1>');
+	    });
 app.get('/', routes.index);
 app.get('/users', user.list);
 
