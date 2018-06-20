@@ -11,7 +11,7 @@ var express = require('express')
 var mysql= require('mysql');
 var app = express();
 var client = mysql.createConnection({
-   hostname:"52.78.101.62:3000", 
+   hostname:"127.0.0.1:3306", 
    user : "root",
    password:"1234",
    database:"darack"
@@ -51,20 +51,22 @@ app.get('/signup', function(req, res){
    res.render('./signup.html');
 });
 
+
 app.post('/logincheck', function(req, res){
    var uid=req.body.id;
    var upw=req.body.pw;
    var connection=client.query
-   ('SELECT count(*) cnt FROM user WHERE user_id=? and user_pw=?', [uid, upw], function(err,rows){
+   ('SELECT count(*) cnt,user_nickname FROM user WHERE user_id=? and user_pw=?', [uid, upw], function(err,rows){
       if(err) console.error('err', err);
       var cnt = rows[0].cnt;
       if(cnt===1){
 // req.session.user_id=id;
     	  res.send(
-    			  '<h1>login success</h1>');
+    			  '<h1>'+rows[0].user_nickname+' login success</h1>');
       }else{
-    	  res.json({result:'fail'});
     	  res.send('<script> alert("id or password is wrong"); history.back(); </script>');
+       	  res.json({result:'fail'});
+       	  
       }
    });
 });
@@ -79,22 +81,11 @@ app.post('/signupcheck', function(req, res){
 	var connection=client.query
 	('INSERT INTO user (user_id, user_nickname, user_email,	 user_pw, user_name, user_pn, user_bd) VALUES (?, ?, ?, ?, ?, ?, ?)',
 			[nid, nnn, nem, npw, nn, npn, nbd] ,function(err,result){
-	    
-	    console.log(result);
-	       
-	       
-	        if (err) {
-
-	            console.error(err);
-
-	            throw err;
-
-	        }
-
-	        console.log(connection);
+	      if(err) console.error('err', err);
 
 	    });
-	    res.send('<h1>'+nid+'님 환영합니다.'+'</h1>');
+		res.send('<script> alert("id")</script>');
+	    res.redirect('/');
 	    });
 app.get('/', routes.index);
 app.get('/users', user.list);
