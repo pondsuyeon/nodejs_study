@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>블로그</title>
+</head>
+<style>
+    header {
+        width: 100%;
+        text-align: center;
+        height: 15vh;
+        font-size: 4em;
+        background-color: pink;
+    }
+
+    #c1 {
+        width: 100%;
+        text-align: center;
+
+    }
+
+    #c2 {
+
+        width: 20%;
+        text-align: center;
+        height: 70vh;
+        background: pink;
+        float: left;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    footer {
+        clear: left;
+    }
+
+</style>
+
+<body>
+    <header>
+        <%=id%>님으 ㅣ 블로그</header>
+    <nav id="c1">카테고리 12345678910</nav>
+    <nav id="c2">
+        <div class="container">
+            <div id=profile>
+                <img src="http://static.ebs.co.kr/images/ebs/WAS-HOME/portal/upload/img/programinfo/person/per/1242723628671_jQsezgDpQe.jpg" width="80%">
+            </div>
+            <div>
+                <button type="button" onclick="location.href='/logout">logout</button>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <form method="post" action="/delete">
+            <%=rows.title%><input type="hidden" name="id" value="<%=rows.id%>">
+                <hr>
+                <%=rows.content%>
+                    <button>삭제</button>
+        </form>
+        <button onclick="location.href='/rewrite<%=rows.id%>'">수정</button>
+        <button onclick="location.href='/main1'">목록</button>
+    </section>
+    <footer>마지막이지롱</footer>
+</body>
+
+</html>

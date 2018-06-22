@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>블로그</title>
+</head>
+<style>
+    header {
+        width: 100%;
+        text-align: center;
+        height: 15vh;
+        font-size: 4em;
+        background-color: pink;
+    }
+
+    #c1 {
+        width: 100%;
+        text-align: center;
+
+    }
+
+    #c2 {
+
+        width: 20%;
+        text-align: center;
+        height: 70vh;
+        background: pink;
+        float: left;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    footer {
+        clear: left;
+    }
+
+</style>
+
+<body>
+    <header>
+        <%=id%>님으 ㅣ 블로그</header>
+    <nav id="c1">카테고리 12345678910</nav>
+    <nav id="c2">
+        <div class="container">
+            <div id=profile>
+                <img src="http://static.ebs.co.kr/images/ebs/WAS-HOME/portal/upload/img/programinfo/person/per/1242723628671_jQsezgDpQe.jpg" width="80%">
+            </div>
+            <div>
+                <button type="button" onclick="location.href='/logout'">logout</button>
+            </div>
+        </div>
+    </nav>
+    <section>
+        하아이이이이 글을 작성합시다!
+        <form method="post" action="/write">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>제목</th>
+                        <td><input type="text" name="title" required="required"></td>
+                    </tr>
+                    <tr>
+                        <th>내용</th>
+                        <td><textarea cols="70" rows="20" name="content" required="required"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center">
+                <input type="button" value="되돌아가기" onclick="history.go(-1)"><input type="submit" value="확인">
+            </div>
+        </form>
+    </section>
+    <footer>마지막이지롱</footer>
+</body>
+
+</html>
