@@ -125,7 +125,7 @@ app.post('/logincheck', function(req, res){
    var uid=req.body.id;
    var upw=req.body.pw;
    var connection=client.query
-   ('SELECT count(*) cnt,user_nickname FROM user WHERE user_id=? and user_pw=?', [uid, upw], function(err,rows){
+   ('SELECT count(*) cnt FROM user WHERE user_id=? and user_pw=?', [uid, upw], function(err,rows){
       if(err) console.error('err', err);
       var cnt = rows[0].cnt;
 
