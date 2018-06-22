@@ -202,7 +202,7 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 
-var server = app.listen(3001, function(){
+var server = app.listen(3000, function(){
 	console.log('suyeon server');
 })
 
