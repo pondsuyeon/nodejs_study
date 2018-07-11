@@ -169,7 +169,7 @@ app.post('/write', function(req,res){
 	var writer=req.session.sessionId;
 	var title=req.body.title;
 	var content=req.body.content;
-	var connection=client.query('INSERT INTO board (writer, title, content) VALUES (?, ?, ?)',[writer, title, content], function(err, result){
+	var connection=client.query('INSERT INTO board (writer, title, content, viewcount) VALUES (?, ?, ?, ?)',[writer, title, content, 0], function(err, result){
 		if(err) console.error('err', err);
 	});
 	res.redirect('/');
