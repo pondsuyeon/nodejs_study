@@ -15,7 +15,7 @@ var express = require('express')
   , MySQLStore = require('express-mysql-session')(session);
 
 var dbconfig = {
-		   hostname:"localhost", 
+		   hostname:"127.0.0.1:3306", 
 		   user : "root",
 		   password:"1234",
 		   database:"darack"
@@ -63,7 +63,7 @@ if ('development' == app.get('env')) {
 app.get('/', function(req, res){
 	console.log(req.session);
 	if(req.session.sessionId)
-		res.redirect('./main1');
+		res.redirect('/main1');
 		else
 	res.render('index.html');
 });
@@ -84,20 +84,6 @@ app.get('/board', function(req, res){
 		});
 	}
 });
-app.post('/write', function(req,res){
-	var writer=req.session.sessionId;
-	var title=req.body.title;
-	var content=req.body.content;
-	var connection=client.query('INSERT INTO board (writer, title, content) VALUES (?, ?, ?)',[writer, title, content], function(err, result){
-		if(err) console.error('err', err);
-	});
-	res.render('./main');
-});
-app.get('/write', function(req,res){
-	res.render('./board', {
-		id: req.session.sessionId
-	});
-});
 app.get('/main:number', function(req, res){
 	if(!req.session.sessionId){
 		res.redirect('/');
@@ -116,7 +102,6 @@ app.get('/main:number', function(req, res){
 		});
 	}
 });
-
 app.get('/look:number',function(req,res){
 	   client.query('UPDATE board SET viewcount=viewcount+1 where id=?',[req.params.number]);
 	   var query = client.query('SELECT * from board WHERE id=?',[req.params.number],function(err, rows){
@@ -175,7 +160,20 @@ app.get('/logout',function(req, res){
 	delete req.session.sessionId;
 	res.redirect("/"); 
 }); 
-
+app.get('/write', function(req,res){
+	res.render('./board', {
+		id: req.session.sessionId
+	});
+});
+app.post('/write', function(req,res){
+	var writer=req.session.sessionId;
+	var title=req.body.title;
+	var content=req.body.content;
+	var connection=client.query('INSERT INTO board (writer, title, content) VALUES (?, ?, ?)',[writer, title, content], function(err, result){
+		if(err) console.error('err', err);
+	});
+	res.redirect('/main');
+});
 app.get('/rewrite:number', function(req,res){
 	client.query('SELECT * FROM board WHERE id=?',[req.params.number],function(err,rows){
 		if(err) console.error('err', err);
