@@ -110,7 +110,7 @@ app.post('/write', function(req,res){
 	var connection=client.query('INSERT INTO board (writer, title, content) VALUES (?, ?, ?)',[writer, title, content], function(err, result){
 		if(err) console.error('err', err);
 	});
-	res.render('/main1');
+	res.render('./main');
 });
 app.get('/write', function(req,res){
 	res.render('./board', {
