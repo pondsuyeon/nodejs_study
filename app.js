@@ -84,7 +84,20 @@ app.get('/board', function(req, res){
 		});
 	}
 });
-
+app.post('/write', function(req,res){
+	var writer=req.session.sessionId;
+	var title=req.body.title;
+	var content=req.body.content;
+	var connection=client.query('INSERT INTO board (writer, title, content) VALUES (?, ?, ?)',[writer, title, content], function(err, result){
+		if(err) console.error('err', err);
+	});
+	res.render('./main');
+});
+app.get('/write', function(req,res){
+	res.render('./board', {
+		id: req.session.sessionId
+	});
+});
 app.get('/main:number', function(req, res){
 	if(!req.session.sessionId){
 		res.redirect('/');
@@ -103,20 +116,7 @@ app.get('/main:number', function(req, res){
 		});
 	}
 });
-app.post('/write', function(req,res){
-	var writer=req.session.sessionId;
-	var title=req.body.title;
-	var content=req.body.content;
-	var connection=client.query('INSERT INTO board (writer, title, content) VALUES (?, ?, ?)',[writer, title, content], function(err, result){
-		if(err) console.error('err', err);
-	});
-	res.render('./main');
-});
-app.get('/write', function(req,res){
-	res.render('./board', {
-		id: req.session.sessionId
-	});
-});
+
 app.get('/look:number',function(req,res){
 	   client.query('UPDATE board SET viewcount=viewcount+1 where id=?',[req.params.number]);
 	   var query = client.query('SELECT * from board WHERE id=?',[req.params.number],function(err, rows){
