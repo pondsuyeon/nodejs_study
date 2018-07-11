@@ -171,8 +171,9 @@ app.post('/write', function(req,res){
 	var content=req.body.content;
 	var connection=client.query('INSERT INTO board (writer, title, content) VALUES (?, ?, ?)',[writer, title, content], function(err, result){
 		if(err) console.error('err', err);
+		res.redirect('/main1');
+
 	});
-	res.redirect('/main1');
 });
 app.get('/rewrite:number', function(req,res){
 	client.query('SELECT * FROM board WHERE id=?',[req.params.number],function(err,rows){
