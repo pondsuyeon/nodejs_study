@@ -60,24 +60,6 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/main:number', function(req, res){
-	if(!req.session.sessionId){
-		res.redirect('/');
-	}else{
-		client.query('SELECT count(*) cnt FROM board', function(err,rows){
-			var cnt=rows;
-				client.query('SELECT id, writer, title, content, viewcount, date_format(board.wdate, "%Y-%m-%d") as wdate FROM board order by id desc limit ?, 10',[10*(req.params.number-1)], function(err,rows){
-
-				if(err) console.error('err',err);
-				res.render('./main', {
-					id: req.session.sessionId,
-					rows: rows,
-					cnt: cnt
-				});				
-			})
-		});
-	}
-});
 app.get('/', function(req, res){
 	console.log(req.session);
 	if(req.session.sessionId)
@@ -105,6 +87,24 @@ app.get('/board', function(req, res){
 	}
 });
 
+app.get('/main:number', function(req, res){
+	if(!req.session.sessionId){
+		res.redirect('/');
+	}else{
+		client.query('SELECT count(*) cnt FROM board', function(err,rows){
+			var cnt=rows;
+				client.query('SELECT id, writer, title, content, viewcount, date_format(board.wdate, "%Y-%m-%d") as wdate FROM board order by id desc limit ?, 10',[10*(req.params.number-1)], function(err,rows){
+
+				if(err) console.error('err',err);
+				res.render('./main', {
+					id: req.session.sessionId,
+					rows: rows,
+					cnt: cnt
+				});				
+			})
+		});
+	}
+});
 app.post('/write', function(req,res){
 	var writer=req.session.sessionId;
 	var title=req.body.title;
