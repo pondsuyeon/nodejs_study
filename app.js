@@ -15,7 +15,7 @@ var express = require('express')
   , MySQLStore = require('express-mysql-session')(session);
 
 var dbconfig = {
-		   hostname:"127.0.0.1:3306", 
+		   hostname:"localhost", 
 		   user : "root",
 		   password:"1234",
 		   database:"darack"
