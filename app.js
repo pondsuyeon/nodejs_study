@@ -79,7 +79,6 @@ app.get('/board', function(req, res){
 	if(!req.session.sessionId){
 		res.redirect('/');
 	}else{
-			if(err) console.error('err',err);
 			res.render('./board', {
 				id: req.session.sessionId,
 		});
