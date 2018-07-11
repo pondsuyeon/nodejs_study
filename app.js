@@ -63,9 +63,7 @@ if ('development' == app.get('env')) {
 app.get('/', function(req, res){
 	console.log(req.session);
 	if(req.session.sessionId)
-		res.render('/main1',{
-			id: req.session.sessionId,
-		});
+		res.redirect('/main1');
 		else
 	res.render('index.html');
 });
